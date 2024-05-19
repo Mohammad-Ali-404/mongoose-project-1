@@ -1,16 +1,23 @@
 import { Schema, model, connect } from "mongoose";
-import { User } from "./student.interface";
+import { User, UserName } from "./student.interface";
+
+const nameSchema = new Schema<UserName>({
+  firstName: { type: String, required: true },
+  middleName: { type: String, required: true },
+  lastName: { type: String, required: true },
+});
 
 const userSchema = new Schema<User>({
   id: { type: String, required: true },
-  name: {
-    firstName: { type: String, required: true },
-    middleName: { type: String, required: true },
-    lastName: { type: String, required: true },
-  },
+  name: nameSchema,
   gender: ["male", "female"],
   email: { type: String, required: true },
   dateOfBirth: { type: String },
+  phone: { type: String, required: true },
+  emergencyContact: { type: String },
+  bloodGrp: ["A+", "B+", "AB+"],
+  presentAddress: { type: String, required: true },
+  permanentAddress: { type: String, required: true },
   avatar: String,
 });
 
