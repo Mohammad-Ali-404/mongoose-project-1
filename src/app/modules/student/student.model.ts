@@ -22,4 +22,4 @@ const userSchema = new Schema<User>({
 });
 
 // 3. Create a Model.
-const User = model<User>("User", userSchema);
+export const UsersModel = model<User>("student", userSchema);
