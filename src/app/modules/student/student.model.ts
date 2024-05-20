@@ -1,4 +1,4 @@
-import { Schema, model, connect } from "mongoose";
+import { Schema, model } from "mongoose";
 import { User, UserName } from "./student.interface";
 
 const nameSchema = new Schema<UserName>({
@@ -22,4 +22,4 @@ const userSchema = new Schema<User>({
 });
 
 // 3. Create a Model.
-export const UsersModel = model<User>("student", userSchema);
+export const UsersModel = model<User>("students", userSchema);
