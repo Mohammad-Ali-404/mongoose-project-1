@@ -1,9 +1,9 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, RequestHandler, Response } from "express";
 import { StudentServices } from "./student.service";
 import studentSchema from "./student.validation";
 import { z } from "zod";
 
-const createStudent = async (req: Request, res: Response) => {
+const createStudent: RequestHandler = async (req, res, next) => {
   try {
     // creating a schema validation using joi
 
