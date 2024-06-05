@@ -1,15 +1,23 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { StudentServices } from "./student.service";
+import studentSchema from "./student.validation";
+import { z } from "zod";
 
 const createStudent = async (req: Request, res: Response) => {
   try {
+    // creating a schema validation using joi
+
     const { student: studentData } = req.body;
-    const result = await StudentServices.createStudentToDB(studentData);
-    res.status(200).json({
-      success: true,
-      message: "Student create successfully",
-      data: result,
+    const studentValidationSchema = z.object({
+      id: z.string(),
+      name: z.object({
+        firstName: z.string(),
+        middleName: z.string(),
+        lastName: z.string(),
+      }),
     });
+    // const { value, error } = studentSchema.validate(studentData);
+    // console.log(error, value);
   } catch (error) {
     console.log(error);
   }
@@ -27,7 +35,11 @@ const getAllStudents = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
-const getSingleStudents = async (req: Request, res: Response) => {
+const getSingleStudents = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { studentId } = req.params;
     const result = await StudentServices.getSingleStudentFromDB(studentId);
@@ -41,7 +53,7 @@ const getSingleStudents = async (req: Request, res: Response) => {
   }
 };
 export const studentController = {
-  createStudent,
   getAllStudents,
   getSingleStudents,
+  createStudent,
 };

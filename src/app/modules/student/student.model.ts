@@ -1,25 +1,46 @@
 import { Schema, model } from "mongoose";
-import { User, UserName } from "./student.interface";
-
+import { TStudent, UserName } from "./student.interface";
 const nameSchema = new Schema<UserName>({
-  firstName: { type: String, required: true },
-  middleName: { type: String, required: true },
-  lastName: { type: String, required: true },
+  firstName: { type: String, required: [true, "First name is required"] },
+  middleName: { type: String, required: [true, "Middle name is required"] },
+  lastName: { type: String, required: [true, "Last name is required"] },
 });
 
-const userSchema = new Schema<User>({
-  id: { type: String, required: true },
+const userSchema = new Schema<TStudent>({
+  id: { type: String, required: [true, "ID is required"] },
+  user: {
+    type: Schema.Types.ObjectId,
+    required: [true, "user is required"],
+    unique: true,
+    ref: "User",
+  },
   name: nameSchema,
-  gender: ["male", "female"],
-  email: { type: String, required: true },
+  gender: {
+    type: String,
+    enum: ["male", "female", "other"],
+    required: [true, "Gender is required"],
+  },
+  email: { type: String, required: [true, "Email is required"] },
   dateOfBirth: { type: String },
-  phone: { type: String, required: true },
+  phone: { type: String, required: [true, "Phone number is required"] },
   emergencyContact: { type: String },
-  bloodGrp: ["A+", "B+", "AB+"],
-  presentAddress: { type: String, required: true },
-  permanentAddress: { type: String, required: true },
+  bloodGrp: {
+    type: String,
+    enum: {
+      values: ["A+", "B+", "AB+"],
+      message: 'Blood group must be one of "A+", "B+", "AB+"',
+    },
+  },
+  presentAddress: {
+    type: String,
+    required: [true, "Present address is required"],
+  },
+  permanentAddress: {
+    type: String,
+    required: [true, "Permanent address is required"],
+  },
   avatar: String,
 });
 
-// 3. Create a Model.
-export const UsersModel = model<User>("students", userSchema);
+// Create a Model.
+export const Student = model<TStudent>("students", userSchema);
