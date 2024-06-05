@@ -4,6 +4,7 @@ import cors from "cors";
 import { studentRoute } from "./app/modules/student/student.route";
 import { userRoutes } from "./app/modules/user/user.route";
 import globalErrorHandler from "./app/middlewares/globalErrorHandler";
+import notFound from "./app/middlewares/notFound";
 
 // parser
 app.use(express.json());
@@ -17,5 +18,6 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use(globalErrorHandler);
+app.use(notFound);
 
 export default app;

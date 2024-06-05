@@ -1,12 +1,15 @@
-import { Request, Response } from "express";
+import { Request, Response, response } from "express";
 import { userServices } from "./user.service";
+import sendResponse from "../../utils/sendResponse";
+import httpStatus from "http-status";
 
 const createStudent = async (req: Request, res: Response) => {
   try {
     const { password, student: studentData } = req.body;
     const result = await userServices.createStudentToDB(password, studentData);
-    res.status(200).json({
+    sendResponse(res, {
       success: true,
+      statusCode: httpStatus.OK,
       message: "Student create successfully",
       data: result,
     });
