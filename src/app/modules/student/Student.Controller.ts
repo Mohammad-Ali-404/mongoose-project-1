@@ -1,12 +1,7 @@
 import { NextFunction, Request, RequestHandler, Response } from "express";
 import { StudentServices } from "./student.service";
 import { z } from "zod";
-
-const catchAsync = (fn: RequestHandler) => {
-  return (req: Request, res: Response, next: NextFunction) => {
-    Promise.resolve(fn(req, res, next)).catch((error) => next(error));
-  };
-};
+import catchAsync from "../../utils/catchAsync";
 
 const createStudent = catchAsync(async (req, res, next) => {
   // creating a schema validation using joi
