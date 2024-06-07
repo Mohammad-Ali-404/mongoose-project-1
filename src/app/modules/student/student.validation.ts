@@ -1,22 +1,27 @@
-import Joi from "joi";
+import { z } from "zod";
 
-const nameSchema = Joi.object({
-  firstName: Joi.string().required(),
-  middleName: Joi.string().required(),
-  lastName: Joi.string().required(),
-});
-const studentSchema = Joi.object({
-  id: Joi.string().required(),
-  name: nameSchema,
-  gender: Joi.string().valid("male", "female", "other").required(),
-  email: Joi.string().email().required(),
-  dateOfBirth: Joi.string().isoDate(),
-  phone: Joi.string().required(),
-  emergencyContact: Joi.string(),
-  bloodGrp: Joi.string().valid("A+", "B+", "AB+"),
-  presentAddress: Joi.string().required(),
-  permanentAddress: Joi.string().required(),
-  avatar: Joi.string().uri(),
+const nameSchema = z.object({
+  firstName: z.string(),
+  middleName: z.string(),
+  lastName: z.string(),
 });
 
-export default studentSchema;
+const studentSchema = z.object({
+  body: z.object({
+    student: z.object({
+      name: nameSchema,
+      gender: z.enum(["male", "female", "other"]),
+      email: z.string().email(),
+      dateOfBirth: z.string().optional(),
+      phone: z.string(),
+      emergencyContact: z.string().optional(),
+      bloodGrp: z.enum(["A+", "B+", "AB+"]).optional(),
+      presentAddress: z.string(),
+      permanentAddress: z.string(),
+    }),
+  }),
+});
+
+export const studentValidationSchema = {
+  studentSchema,
+};

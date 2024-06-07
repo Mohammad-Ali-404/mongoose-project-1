@@ -7,7 +7,7 @@ const nameSchema = new Schema<UserName>({
 });
 
 const userSchema = new Schema<TStudent>({
-  id: { type: String, required: [true, "ID is required"] },
+  // id: { type: String, required: [true, "ID is required"] },
   user: {
     type: Schema.Types.ObjectId,
     required: [true, "user is required"],
