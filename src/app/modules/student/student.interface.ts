@@ -12,7 +12,7 @@ export type TStudent = {
   name: UserName;
   gender: "male" | "female";
   email: string;
-  dateOfBirth?: string;
+  dateOfBirth?: Date;
   phone: string;
   emergencyContact?: string;
   bloodGrp?: "A+" | "B+" | "AB+";
