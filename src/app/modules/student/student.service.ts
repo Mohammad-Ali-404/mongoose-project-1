@@ -1,11 +1,11 @@
-import { UsersModel } from "./student.model";
+import { Student } from "./student.model";
 
 const getAllStudentFromDB = async () => {
-  const result = await UsersModel.find();
+  const result = await Student.find();
   return result;
 };
 const getSingleStudentFromDB = async (id: string) => {
-  const result = await UsersModel.findOne({ id });
+  const result = await Student.findOne({ id });
   console.log(result);
 };
 export const StudentServices = {

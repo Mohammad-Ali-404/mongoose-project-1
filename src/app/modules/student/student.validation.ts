@@ -9,6 +9,7 @@ const nameSchema = z.object({
 const studentSchema = z.object({
   body: z.object({
     student: z.object({
+      id: z.string(),
       name: nameSchema,
       gender: z.enum(["male", "female", "other"]),
       email: z.string().email(),
@@ -17,6 +18,7 @@ const studentSchema = z.object({
       emergencyContact: z.string().optional(),
       bloodGrp: z.enum(["A+", "B+", "AB+"]).optional(),
       presentAddress: z.string(),
+      admissionSemister: z.string(),
       permanentAddress: z.string(),
     }),
   }),

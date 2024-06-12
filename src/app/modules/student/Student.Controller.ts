@@ -5,15 +5,6 @@ import catchAsync from "../../utils/catchAsync";
 
 const createStudent = catchAsync(async (req, res, next) => {
   // creating a schema validation using joi
-  const { student: studentData } = req.body;
-  const studentValidationSchema = z.object({
-    id: z.string(),
-    name: z.object({
-      firstName: z.string(),
-      middleName: z.string(),
-      lastName: z.string(),
-    }),
-  });
 });
 
 const getAllStudents = catchAsync(async (req: Request, res: Response) => {

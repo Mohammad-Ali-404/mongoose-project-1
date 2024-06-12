@@ -18,5 +18,6 @@ export type TStudent = {
   bloodGrp?: "A+" | "B+" | "AB+";
   presentAddress: string;
   permanentAddress: string;
+  admissionSemister: Types.ObjectId;
   avatar?: string;
 };

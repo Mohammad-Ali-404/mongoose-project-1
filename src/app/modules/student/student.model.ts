@@ -7,7 +7,7 @@ const nameSchema = new Schema<UserName>({
 });
 
 const userSchema = new Schema<TStudent>({
-  // id: { type: String, required: [true, "ID is required"] },
+  id: { type: String, required: [true, "ID is required"], unique: true },
   user: {
     type: Schema.Types.ObjectId,
     required: [true, "user is required"],
@@ -38,6 +38,10 @@ const userSchema = new Schema<TStudent>({
   permanentAddress: {
     type: String,
     required: [true, "Permanent address is required"],
+  },
+  admissionSemister: {
+    type: Schema.Types.ObjectId,
+    ref: "AcademicSemister",
   },
   avatar: String,
 });
