@@ -43,6 +43,10 @@ const userSchema = new Schema<TStudent>({
     type: Schema.Types.ObjectId,
     ref: "AcademicSemister",
   },
+  academicDepartment: {
+    type: Schema.Types.ObjectId,
+    ref: "AcademicDepartment",
+  },
   avatar: String,
 });
 

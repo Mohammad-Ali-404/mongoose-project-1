@@ -19,5 +19,6 @@ export type TStudent = {
   presentAddress: string;
   permanentAddress: string;
   admissionSemister: Types.ObjectId;
+  academicDepartment: Types.ObjectId;
   avatar?: string;
 };
