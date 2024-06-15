@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { Student } from "./student.model";
 
 const getAllStudentFromDB = async () => {
@@ -20,7 +21,20 @@ const getSingleStudentFromDB = async (id: string) => {
   });
   console.log(result);
 };
+const deleteStudentFromDB = async (id: string) => {
+  const session = await mongoose.startSession();
+  try {
+    session.startTransaction();
+    const result = await Student.findOneAndUpdate(
+      { id },
+      { isDeleted: true },
+      { new: true, session }
+    );
+    return result;
+  } catch (error) {}
+};
 export const StudentServices = {
   getAllStudentFromDB,
   getSingleStudentFromDB,
+  deleteStudentFromDB,
 };
