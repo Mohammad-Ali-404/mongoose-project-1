@@ -6,7 +6,7 @@ const nameSchema = new Schema<UserName>({
   lastName: { type: String, required: [true, "Last name is required"] },
 });
 
-const userSchema = new Schema<TStudent>({
+const studentSchema = new Schema<TStudent>({
   id: { type: String, required: [true, "ID is required"], unique: true },
   user: {
     type: Schema.Types.ObjectId,
@@ -51,4 +51,4 @@ const userSchema = new Schema<TStudent>({
 });
 
 // Create a Model.
-export const Student = model<TStudent>("students", userSchema);
+export const Student = model<TStudent>("students", studentSchema);

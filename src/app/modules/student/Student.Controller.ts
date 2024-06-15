@@ -1,6 +1,5 @@
 import { NextFunction, Request, RequestHandler, Response } from "express";
 import { StudentServices } from "./student.service";
-import { z } from "zod";
 import catchAsync from "../../utils/catchAsync";
 const getAllStudents = catchAsync(async (req: Request, res: Response) => {
   const result = await StudentServices.getAllStudentFromDB();
