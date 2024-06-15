@@ -3,6 +3,7 @@ import { ZodError } from "zod";
 import { TErrorSource } from "../interface/error";
 import config from "../config";
 import handleZodError from "../errors/handleZodError";
+import handleValidationError from "../errors/handleValidationError";
 
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   let statusCode = err.statusCode || 500;
@@ -21,14 +22,17 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     message = simplifiedError.message;
     errorSources = simplifiedError.errorSources;
   } else if (err?.name === "validationError") {
-    console.log("ami mongoose validation error");
+    const simplifiedError = handleValidationError(err);
+    statusCode = simplifiedError.statusCode;
+    message = simplifiedError.message;
+    errorSources = simplifiedError.errorSources;
   }
 
   return res.status(statusCode).json({
     success: false,
     message,
     errorSources,
-    err,
+    // err,
     stack: config.node_env === "development" ? err?.stack : null,
     // error: err,
   });
